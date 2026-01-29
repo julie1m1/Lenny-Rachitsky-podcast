@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8"><title>IELTS Marker Pro</title>
     <style>
         :root { --bg: #f9f7f2; --text: #1a1a1a; --accent: #d97757; }
@@ -58,7 +60,78 @@
         .v-word { font-size: 16px; }
         .v-lvl-tag { font-size: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 1px 4px; border-radius: 3px; font-weight: bold; }
         .v-body { font-size: 14px; margin-top: 4px; color: #444; }
-    </style>
+
+        /* 针对屏幕宽度小于 768px 的设备（手机、部分平板） */
+@media (max-width: 768px) {
+    /* 1. 将 body 的 display 改为 block，解除桌面端的 flex 布局 */
+    body {
+        display: block;
+        height: auto; /* 允许纵向滚动 */
+        overflow-y: visible; /* 恢复滚动条 */
+    }
+
+    /* 2. 隐藏左侧和右侧栏 */
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+
+    /* 3. 调整主内容区，充满屏幕并移除固定宽度/边距限制 */
+    .main {
+        padding: 20px; /* 缩小移动端的内边距 */
+        width: 100%;
+        box-sizing: border-box; /* 确保 padding 不撑破屏幕 */
+        overflow-y: visible; /* 让整体 body 滚动，而不是单独区域 */
+    }
+
+    /* 4. 优化：让内部卡片宽度自适应 */
+    .paragraph-wrap, details.summary-box {
+        padding: 15px; /* 适当减少内边距 */
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 5. 优化：调整文字大小（可选） */
+    .paragraph, .sum-point {
+        font-size: 17px; /* 移动端稍细的文字感观更好 */
+    }
+}
+    /* 针对屏幕宽度小于 768px 的设备（手机、部分平板） */
+@media (max-width: 768px) {
+    /* 1. 将 body 的 display 改为 block，解除桌面端的 flex 布局 */
+    body {
+        display: block;
+        height: auto; /* 允许纵向滚动 */
+        overflow-y: visible; /* 恢复滚动条 */
+    }
+
+    /* 2. 隐藏左侧和右侧栏 */
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+
+    /* 3. 调整主内容区，充满屏幕并移除固定宽度/边距限制 */
+    .main {
+        padding: 20px; /* 缩小移动端的内边距 */
+        width: 100%;
+        box-sizing: border-box; /* 确保 padding 不撑破屏幕 */
+        overflow-y: visible; /* 让整体 body 滚动，而不是单独区域 */
+    }
+
+    /* 4. 优化：让内部卡片宽度自适应 */
+    .paragraph-wrap, details.summary-box {
+        padding: 15px; /* 适当减少内边距 */
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 5. 优化：调整文字大小（可选） */
+    .paragraph, .sum-point {
+        font-size: 17px; /* 移动端稍细的文字感观更好 */
+    }
+}
+</style>
 </head>
 <body>
     <div class="sidebar-left">
