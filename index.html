@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>lenny rachitsky transcripts</title>
+  <link rel="icon" href="https://substackcdn.com/image/fetch/$s_!6RbS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d6af901-7717-4d79-b49e-8bc28427148c%2Ffavicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --text: #0f172a;
+      --subtle: #64748b;
+      --border: #e5e7eb;
+      --hover: #f1f5f9;
+      --accent: #111827;
+      --tag-bg: #f1f5f9;
+      --tag-text: #334155;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* ===== Toolbar ===== */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left {
+      font-size: 14px;
+      color: var(--subtle);
+    }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .toolbar input, .toolbar select, .toolbar button {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 14px;
+    }
+
+    .toolbar button {
+      cursor: pointer;
+    }
+
+    .toolbar .active {
+      background: var(--hover);
+      font-weight: 600;
+    }
+
+    /* ===== List Wrapper ===== */
+    .list-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* ===== List Item ===== */
+    .item {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 18px;
+      display: flex;
+      gap: 16px;
+    }
+    .item:last-child { border-bottom: none; }
+
+    .thumb {
+      width: 160px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #eee;
+      flex-shrink: 0;
+    }
+
+    .item-main {
+      flex: 1;
+    }
+
+    .item-header {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .toggle {
+      cursor: pointer;
+      user-select: none;
+      font-size: 14px;
+      padding-top: 2px;
+      color: var(--subtle);
+    }
+
+    .title-block { flex: 1; }
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .title:hover { text-decoration: underline; }
+
+    .meta-line {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--subtle);
+      flex-wrap: wrap;
+    }
+
+    .tags {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .expand {
+      margin-top: 14px;
+      display: none;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .expand-section { margin-bottom: 10px; }
+    .expand-title { font-weight: 600; }
+
+    /* ===== Card Mode ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .card-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .card-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .empty {
+      padding: 24px;
+      color: var(--subtle);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Break Down Podcast Sentences into SVO</h1>
+    <p>Learn Lenny Rachitsky Podcast English by Analyzing SVO Structures</p>
+
+    <div class="toolbar">
+      <div class="toolbar-left" id="countInfo">Showing 0 items</div>
+
+      <div class="toolbar-right">
+        <input id="searchInput" placeholder="Search..." />
+
+        <select id="companyFilter">
+          <option value="">All Companies</option>
+        </select>
+
+        <select id="sortSelect">
+          <option value="">No Sort</option>
+          <option value="views">Sort by View Count (desc)</option>
+          <option value="duration">Sort by Duration (asc)</option>
+        </select>
+
+        <button id="listBtn" >List</button>
+        <button id="cardBtn" class="active">Card</button>
+      </div>
+    </div>
+
+    <div id="content" class="list-wrap">
+      <div class="empty">Loading...</div>
+    </div>
+  </div>
+
+<script>
+const contentEl = document.getElementById("content");
+const searchInput = document.getElementById("searchInput");
+const companyFilter = document.getElementById("companyFilter");
+const sortSelect = document.getElementById("sortSelect");
+const listBtn = document.getElementById("listBtn");
+const cardBtn = document.getElementById("cardBtn");
+const countInfo = document.getElementById("countInfo");
+
+let rawData = [];
+let viewMode = "card";
+
+function parseDuration(d) {
+  if (!d) return 0;
+  const parts = d.split(":").map(Number);
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  return 0;
+}
+
+function applyFilters() {
+  let data = [...rawData];
+
+  const q = searchInput.value.trim().toLowerCase();
+  if (q) {
+    data = data.filter(item => {
+      const blob = `
+        ${item["Episode Title"]}
+        ${item.Name}
+        ${item.Company}
+        ${item.Description}
+        ${item.Background}
+        ${item["Communication Style"]}
+        ${item.Keywords}
+      `.toLowerCase();
+      return blob.includes(q);
+    });
+  }
+
+  const company = companyFilter.value;
+  if (company) {
+    data = data.filter(item => item.Company === company);
+  }
+
+  const sort = sortSelect.value;
+  if (sort === "views") {
+    data.sort((a, b) => (b["View Count"] || 0) - (a["View Count"] || 0));
+  } else if (sort === "duration") {
+    data.sort((a, b) => parseDuration(a.Duration) - parseDuration(b.Duration));
+  }
+
+  countInfo.textContent = `Showing ${data.length} items`;
+
+  render(data);
+}
+
+function render(data) {
+  if (data.length === 0) {
+    contentEl.innerHTML = `<div class="empty">No results.</div>`;
+    return;
+  }
+
+  if (viewMode === "card") {
+    renderCard(data);
+  } else {
+    renderList(data);
+  }
+}
+
+function renderList(data) {
+  const wrap = document.createElement("div");
+
+  data.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "item";
+
+    const aThumb = document.createElement("a");
+    aThumb.href = item.file;
+
+    const img = document.createElement("img");
+    img.className = "thumb";
+    if (item.youtube_id) {
+      img.src = `https://img.youtube.com/vi/${item.youtube_id}/hqdefault.jpg`;
+    }
+    aThumb.appendChild(img);
+
+    const main = document.createElement("div");
+    main.className = "item-main";
+
+    const header = document.createElement("div");
+    header.className = "item-header";
+
+    const toggle = document.createElement("div");
+    toggle.className = "toggle";
+    toggle.textContent = "▶";
+
+    const titleBlock = document.createElement("div");
+    titleBlock.className = "title-block";
+
+    const title = document.createElement("a");
+    title.className = "title";
+    title.href = item.file;
+    title.textContent = item["Episode Title"];
+
+  const meta = document.createElement("div");
+meta.className = "meta-line";
+
+const metaLine = document.createElement("div");
+
+const yt = document.createElement("a");
+yt.href = item["YouTube URL"];
+yt.target = "_blank";
+yt.textContent = "YouTube";
+yt.style.color = "inherit";
+yt.style.textDecoration = "none";
+yt.style.marginLeft = "8px";
+
+metaLine.appendChild(document.createTextNode(
+  `${item.Name} · ${item.Company} · ${item.Duration} · ${item["View Count"] || 0} views · `
+));
+metaLine.appendChild(yt);
+
+meta.appendChild(metaLine);
+
+    const tags = document.createElement("div");
+    tags.className = "tags";
+    if (item.Keywords) {
+      item.Keywords.split(",").forEach(k => {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = k.trim();
+        tags.appendChild(tag);
+      });
+    }
+
+    const expand = document.createElement("div");
+    expand.className = "expand";
+    expand.innerHTML = `
+      <div class="expand-section"><div class="expand-title">Description</div>${item.Description || ""}</div>
+      <div class="expand-section"><div class="expand-title">Communication Style</div>${item["Communication Style"] || ""}</div>
+      <div class="expand-section"><div class="expand-title">Background</div>${item.Background || ""}</div>
+    `;
+
+    let open = false;
+    toggle.onclick = () => {
+      open = !open;
+      expand.style.display = open ? "block" : "none";
+      toggle.textContent = open ? "▼" : "▶";
+    };
+
+    titleBlock.appendChild(title);
+    titleBlock.appendChild(meta);
+    //titleBlock.appendChild(yt);
+    titleBlock.appendChild(tags);
+
+    header.appendChild(toggle);
+    header.appendChild(titleBlock);
+
+    main.appendChild(header);
+    main.appendChild(expand);
+
+    row.appendChild(aThumb);
+    row.appendChild(main);
+
+    wrap.appendChild(row);
+  });
+
+  contentEl.innerHTML = "";
+  contentEl.appendChild(wrap);
+}
+
+function renderCard(data) {
+  const grid = document.createElement("div");
+  grid.className = "card-grid";
+
+  data.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card-item";
+
+    const aImg = document.createElement("a");
+    aImg.href = item.file;
+
+    const img = document.createElement("img");
+    img.className = "card-thumb";
+    if (item.youtube_id) {
+      img.src = `https://img.youtube.com/vi/${item.youtube_id}/hqdefault.jpg`;
+    }
+    aImg.appendChild(img);
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const title = document.createElement("a");
+    title.className = "card-title";
+    title.href = item.file;
+    title.textContent = item["Episode Title"];
+
+    const meta = document.createElement("div");
+    meta.textContent = `${item.Name} · ${item.Company} · ${item.Duration}`;
+
+const views = document.createElement("div");
+
+const yt = document.createElement("a");
+yt.href = item["YouTube URL"];
+yt.target = "_blank";
+yt.textContent = "YouTube";
+yt.style.color = "inherit";
+yt.style.textDecoration = "none";
+yt.style.marginLeft = "8px";
+
+views.appendChild(document.createTextNode(`${item["View Count"] || 0} views · `));
+views.appendChild(yt);
+
+body.appendChild(title);
+body.appendChild(meta);
+body.appendChild(views);
+
+
+    card.appendChild(aImg);
+    card.appendChild(body);
+
+    grid.appendChild(card);
+  });
+
+  contentEl.innerHTML = "";
+  contentEl.appendChild(grid);
+}
+
+// Load data
+fetch("./list.json")
+  .then(r => r.json())
+  .then(data => {
+    rawData = data;
+
+    const companies = Array.from(new Set(data.map(i => i.Company))).sort();
+    companies.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      companyFilter.appendChild(opt);
+    });
+
+    applyFilters();
+  });
+
+// Events
+searchInput.oninput = applyFilters;
+companyFilter.onchange = applyFilters;
+sortSelect.onchange = applyFilters;
+
+listBtn.onclick = () => {
+  viewMode = "list";
+  listBtn.classList.add("active");
+  cardBtn.classList.remove("active");
+  applyFilters();
+};
+
+cardBtn.onclick = () => {
+  viewMode = "card";
+  cardBtn.classList.add("active");
+  listBtn.classList.remove("active");
+  applyFilters();
+};
+</script>
+</body>
+</html>
